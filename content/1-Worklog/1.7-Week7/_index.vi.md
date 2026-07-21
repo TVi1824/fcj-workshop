@@ -5,55 +5,33 @@ weight: 1
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 
 ### Mục tiêu tuần 7:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Thành thạo orchestration container cấp doanh nghiệp với hệ sinh thái dịch vụ container toàn diện của AWS, từ triển khai container nhẹ đến orchestration Kubernetes phức tạp.
+* Nắm vững cách thiết kế, triển khai và quản lý các ứng dụng được containerized ở quy mô lớn bằng AWS ECS, EKS và Fargate.  
+* Xử lý các thách thức container thực tế bao gồm service mesh, bảo mật, giám sát và tích hợp luồng CI/CD
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Tìm hiểu và làm Lab: <br>&emsp; + Tối ưu hóa kích thước container image và quản lý registry <br>&emsp; + Cấu hình và chạy thử ứng dụng container trên nền tảng Amazon Lightsail Container <br>                                         | 15/06/2026   | 15/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
+| 3   | - Tìm hiểu và làm Lab: <br>&emsp; + Amazon ECS & Chuyển đổi Monolith to Microservices <br>&emsp; + Vận dụng Docker kết hợp với AWS Fargate để chạy và tự động scale các container theo mô hình serverless <br>&emsp; + Thiết lập chi tiết Task definitions, cấu hình services và quản lý cluster trên Amazon ECS <br>                                         | 16/06/2026   | 16/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
+| 4   | - Thực hành khởi tạo và thiết lập cụm Kubernetes tiêu chuẩn trên AWS bằng dịch vụ Amazon EKS <br> - Thực hành cấu hình mạng cho cụm, cài đặt các add-ons cần thiết và tiến hành deploy các workloads (pod, deployment, service) lên môi trường EKS <br>                                           | 17/06/2026   | 17/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
+| 5   | - Tìm hiểu và làm Lab: <br>&emsp; + Thiết lập luồng CI/CD pipeline tự động hoàn toàn bằng AWS CodePipeline <br>&emsp; + Cấu hình webhook để liên kết mã nguồn từ kho lưu trữ GitHub <br>                                            | 18/06/2026   | 18/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
+| 6   | - Tìm hiểu và làm Lab: <br>&emsp; + Cấu hình hệ thống Service Mesh để quản lý traffic và mã hóa giao tiếp giữa các microservices <br>&emsp; + Thiết lập các lớp bảo vệ runtime và kiểm tra mức độ tuân thủ bảo mật của toàn bộ hệ thống <br>                                            | 19/06/2026   | 19/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
 
 
 ### Kết quả đạt được tuần 7:
+* Nắm vững nền tảng vận hành Docker trên môi trường đám mây và tối ưu hóa được container image.
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Đã tự tay cấu hình và quản lý thành công các container workload trên cả Amazon ECS và Kubernetes (Amazon EKS).
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Trải nghiệm thực tế sức mạnh của AWS Fargate trong việc chạy container mà không phải bận tâm về hạ tầng máy chủ nền.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Thiết lập thành công chu trình CI/CD mượt mà từ GitHub lên thẳng môi trường EKS bằng CodePipeline.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+* Đảm bảo được tiêu chuẩn bảo mật doanh nghiệp cho container thông qua các công cụ quét lỗ hổng, bảo vệ runtime và quản lý traffic với Service Mesh.
 
 

@@ -5,104 +5,148 @@ weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-Tại phần này, bạn cần tóm tắt các nội dung trong workshop mà bạn **dự tính** sẽ làm.
-
-# IoT Weather Platform for Lab Research  
-## Giải pháp AWS Serverless hợp nhất cho giám sát thời tiết thời gian thực  
+# Chrono Genesis Game  
+## Web game đối kháng (turn – base trading cards game) được xây dựng theo kiến trúc Serverless trên nền tảng AWS
 
 ### 1. Tóm tắt điều hành  
-IoT Weather Platform được thiết kế dành cho nhóm *ITea Lab* tại TP. Hồ Chí Minh nhằm nâng cao khả năng thu thập và phân tích dữ liệu thời tiết. Nền tảng hỗ trợ tối đa 5 trạm thời tiết, có khả năng mở rộng lên 10–15 trạm, sử dụng thiết bị biên Raspberry Pi kết hợp cảm biến ESP32 để truyền dữ liệu qua MQTT. Nền tảng tận dụng các dịch vụ AWS Serverless để cung cấp giám sát thời gian thực, phân tích dự đoán và tiết kiệm chi phí, với quyền truy cập giới hạn cho 5 thành viên phòng lab thông qua Amazon Cognito.  
+Dự án là Chrono Genesis Game mang thể loại Web game đối kháng (turn – base trading cards game) được xây dựng theo kiến trúc Serverless Real-time Architecture trên nền tảng AWS.
+
+Toàn bộ game sử dụng WebSocket để đồng bộ dữ liệu theo thời gian thực. Các nghiệp vụ của trận đấu được xử lý bởi nhiều AWS Lambda chuyên biệt. Hệ thống sử dụng duy nhất Amazon DynamoDB làm trung tâm dữ liệu toàn diện, đảm nhiệm cả hai vai trò: lưu trữ trạng thái trận đấu (Game State) với đơn vị độ trễ tính bằng milisecond trong thời gian thực, đồng thời lưu trữ dữ liệu lâu dài (User, Deck, Match History, Logs) một cách an toàn và tối ưu chi phí.
+
 
 ### 2. Tuyên bố vấn đề  
 *Vấn đề hiện tại*  
-Các trạm thời tiết hiện tại yêu cầu thu thập dữ liệu thủ công, khó quản lý khi có nhiều trạm. Không có hệ thống tập trung cho dữ liệu hoặc phân tích thời gian thực, và các nền tảng bên thứ ba thường tốn kém và quá phức tạp.  
+- Các hệ thống game thời gian thực truyền thống yêu cầu chi phí duy trì máy chủ liên tục dù không có người chơi.
+
+- Độ trễ mạng ảnh hưởng tiêu cực đến trải nghiệm của tựa game mang tính chiến thuật tính toán liên tục.
 
 *Giải pháp*  
-Nền tảng sử dụng AWS IoT Core để tiếp nhận dữ liệu MQTT, AWS Lambda và API Gateway để xử lý, Amazon S3 để lưu trữ (bao gồm data lake), và AWS Glue Crawlers cùng các tác vụ ETL để trích xuất, chuyển đổi, tải dữ liệu từ S3 data lake sang một S3 bucket khác để phân tích. AWS Amplify với Next.js cung cấp giao diện web, và Amazon Cognito đảm bảo quyền truy cập an toàn. Tương tự như Thingsboard và CoreIoT, người dùng có thể đăng ký thiết bị mới và quản lý kết nối, nhưng nền tảng này hoạt động ở quy mô nhỏ hơn và phục vụ mục đích sử dụng nội bộ. Các tính năng chính bao gồm bảng điều khiển thời gian thực, phân tích xu hướng và chi phí vận hành thấp.  
-
-*Lợi ích và hoàn vốn đầu tư (ROI)*  
-Giải pháp tạo nền tảng cơ bản để các thành viên phòng lab phát triển một nền tảng IoT lớn hơn, đồng thời cung cấp nguồn dữ liệu cho những người nghiên cứu AI phục vụ huấn luyện mô hình hoặc phân tích. Nền tảng giảm bớt báo cáo thủ công cho từng trạm thông qua hệ thống tập trung, đơn giản hóa quản lý và bảo trì, đồng thời cải thiện độ tin cậy dữ liệu. Chi phí hàng tháng ước tính 0,66 USD (theo AWS Pricing Calculator), tổng cộng 7,92 USD cho 12 tháng. Tất cả thiết bị IoT đã được trang bị từ hệ thống trạm thời tiết hiện tại, không phát sinh chi phí phát triển thêm. Thời gian hoàn vốn 6–12 tháng nhờ tiết kiệm đáng kể thời gian thao tác thủ công.  
+Triển khai Serverless Real-time Architecture qua Amazon API Gateway (WebSocket API) và các hàm AWS Lambda để tạo luồng xử lý độc lập. Quy về một luồng Game Engine duy nhất tương tác trực tiếp với Amazon DynamoDB để cập nhật trạng thái, đảm bảo độ trễ và tiết kiệm chi phí.
 
 ### 3. Kiến trúc giải pháp  
-Nền tảng áp dụng kiến trúc AWS Serverless để quản lý dữ liệu từ 5 trạm dựa trên Raspberry Pi, có thể mở rộng lên 15 trạm. Dữ liệu được tiếp nhận qua AWS IoT Core, lưu trữ trong S3 data lake và xử lý bởi AWS Glue Crawlers và ETL jobs để chuyển đổi và tải vào một S3 bucket khác cho mục đích phân tích. Lambda và API Gateway xử lý bổ sung, trong khi Amplify với Next.js cung cấp bảng điều khiển được bảo mật bởi Cognito.  
+Nền tảng áp dụng kiến trúc AWS Serverless để vận hành ứng dụng Web Game đối kháng thẻ bài thời gian thực, có khả năng tự động mở rộng quy mô đáp ứng hàng nghìn người chơi đồng thời. Giao diện người dùng được phân phối qua AWS Amplify và Route 53, được bảo mật và xác thực danh tính bởi Amazon Cognito.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+Các kết nối thời gian thực hai chiều (Real-time WebSocket) được định tuyến qua Amazon API Gateway để tương tác trực tiếp với tập hợp các hàm AWS Lambda (Start Match, Process Game Engine, Save Deck, Handle Timeout, End Match) nhằm xử lý toàn bộ game logic tập trung.
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+Dữ liệu trò chơi và thông tin kết nối được lưu trữ tại Amazon DynamoDB. Ngoài ra, sau khi kết thúc trận đấu, các sự kiện được đẩy vào Amazon SQS để hàm Lambda (Post Match Worker) xử lý bất đồng bộ các tác vụ cập nhật Rank, EXP và lưu lịch sử trận đấu, đảm bảo hệ thống đạt hiệu năng cao và độ trễ cực thấp.  
+
+![IoT Weather Station Architecture](/images/2-Proposal/architecture.png)
+
 
 *Dịch vụ AWS sử dụng*  
-- *AWS IoT Core*: Tiếp nhận dữ liệu MQTT từ 5 trạm, mở rộng lên 15.  
+- *AWS Amplify*: Lưu trữ và phân phối giao diện web game (React/TypeScript), tự động hóa CI/CD.
+
 - *AWS Lambda*: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).  
-- *Amazon API Gateway*: Giao tiếp với ứng dụng web.  
-- *Amazon S3*: Lưu trữ dữ liệu thô (data lake) và dữ liệu đã xử lý (2 bucket).  
-- *AWS Glue*: Crawlers lập chỉ mục dữ liệu, ETL jobs chuyển đổi và tải dữ liệu.  
-- *AWS Amplify*: Lưu trữ giao diện web Next.js.  
-- *Amazon Cognito*: Quản lý quyền truy cập cho người dùng phòng lab.  
+
+- *Amazon Route 53*: Giao tiếp với ứng dụng web.  
+
+- *Amazon S3*: Quản lý tên miền và định tuyến lưu lượng truy cập của người chơi đến ứng dụng.  
+
+- *Amazon Cognito*: Xác thực danh tính người chơi, quản lý phiên đăng nhập và cấp phát JWT Token. 
+
+- *Amazon API Gateway (WebSocket API)*: Quản lý kết nối thời gian thực hai chiều (real-time) giữa Client và Server.
+
+- *AWS Lambda*: Xử lý game logic tập trung và các tác vụ tính toán.
+
+- *Amazon SQS*: Hàng đợi bất đồng bộ nhận dữ liệu từ Lambda Engine và xử lý.
+
+- *Amazon DynamoDB*: Cơ sở dữ liệu NoSQL lưu trữ trạng thái trận đấu, kết nối và dữ liệu người dùng.
+
+- *Security & Monitoring (IAM, KMS, Secrets Manager, CloudWatch, X-Ray)*: Bảo mật phân quyền, quản lý khóa theo dõi nhật ký và giám sát hiệu năng hệ thống.
 
 *Thiết kế thành phần*  
-- *Thiết bị biên*: Raspberry Pi thu thập và lọc dữ liệu cảm biến, gửi tới IoT Core.  
-- *Tiếp nhận dữ liệu*: AWS IoT Core nhận tin nhắn MQTT từ thiết bị biên.  
-- *Lưu trữ dữ liệu*: Dữ liệu thô lưu trong S3 data lake; dữ liệu đã xử lý lưu ở một S3 bucket khác.  
-- *Xử lý dữ liệu*: AWS Glue Crawlers lập chỉ mục dữ liệu; ETL jobs chuyển đổi để phân tích.  
-- *Giao diện web*: AWS Amplify lưu trữ ứng dụng Next.js cho bảng điều khiển và phân tích thời gian thực.  
-- *Quản lý người dùng*: Amazon Cognito giới hạn 5 tài khoản hoạt động.  
+- *Định tuyến real-time*: Amazon API Gateway kết hợp Route 53 quản lý kết nối WebSocket hai chiều giữa người chơi và hệ thống.   
+
+- *Xử lý game logic*: Tập hợp các hàm AWS Lambda đóng vai trò Game Engine tập trung.
+
+- *Xử lý bất đồng bộ*: Amazon SQS nhận sự kiện kết thúc trận đấu để Lambda worker tự động tính toán Rank, EXP và lưu lịch sử.
+
+- *Xử lý dữ liệu*: Amazon DynamoDB lưu trạng thái bàn cờ, thông tin kết nối và hồ sơ người chơi.  
+
+- *Giao diện web*: Xây dựng bằng React / TypeScript, đóng gói và phân phối qua mạng lưới CDN của AWS Amplify.
+
+- *Quản lý người dùng*: Sử dụng Amazon Cognito User Pool để quản lý toàn bộ chu trình của tài khoản (đăng ký, xác thực, đổi mật khẩu và thu hồi phiên đăng nhập).
 
 ### 4. Triển khai kỹ thuật  
 *Các giai đoạn triển khai*  
-Dự án gồm 2 phần — thiết lập trạm thời tiết biên và xây dựng nền tảng thời tiết — mỗi phần trải qua 4 giai đoạn:  
-1. *Nghiên cứu và vẽ kiến trúc*: Nghiên cứu Raspberry Pi với cảm biến ESP32 và thiết kế kiến trúc AWS Serverless (1 tháng trước kỳ thực tập).  
-2. *Tính toán chi phí và kiểm tra tính khả thi*: Sử dụng AWS Pricing Calculator để ước tính và điều chỉnh (Tháng 1).  
-3. *Điều chỉnh kiến trúc để tối ưu chi phí/giải pháp*: Tinh chỉnh (ví dụ tối ưu Lambda với Next.js) để đảm bảo hiệu quả (Tháng 2).  
-4. *Phát triển, kiểm thử, triển khai*: Lập trình Raspberry Pi, AWS services với CDK/SDK và ứng dụng Next.js, sau đó kiểm thử và đưa vào vận hành (Tháng 2–3).  
+1. Khởi tạo hạ tầng: Triển khai môi trường, tên miền và thiết lập CI/CD thông qua AWS Amplify.
+
+2. Kết nối & Xác thực: Cấu hình Amazon Cognito cho người dùng và thiết lập luồng kết nối WebSocket
+qua API Gateway.
+
+3. Xây dựng Game Engine: Lập trình các hàm Lambda lõi (Start Match, Process Action, End Match)
+xử lý logic thẻ bài.
+
+4. Hậu kỳ trận đấu: Cấu hình hàng đợi SQS và Lambda Worker để xử lý điểm Rank, lịch sử mà không gây nghẽn hệ thống.
+
+5. Kiểm thử & Tối ưu: Giám sát X-Ray, CloudWatch, tối ưu bảo mật với WAF/IAM và thực hiện kiểm thử tải (Stress Test).
 
 *Yêu cầu kỹ thuật*  
-- *Trạm thời tiết biên*: Cảm biến (nhiệt độ, độ ẩm, lượng mưa, tốc độ gió), vi điều khiển ESP32, Raspberry Pi làm thiết bị biên. Raspberry Pi chạy Raspbian, sử dụng Docker để lọc dữ liệu và gửi 1 MB/ngày/trạm qua MQTT qua Wi-Fi.  
-- *Nền tảng thời tiết*: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.  
+- *Hạ tầng hệ thống*: AWS Amplify (Hosting & CI/CD), GitHub, Route 53 (tên miền), IAM và VPC để triển khai, quản lý và bảo mật hệ thống.  
+
+- *Nền tảng game*: Amazon Cognito (xác thực JWT), API Gateway (WebSocket), AWS Lambda (xử lý logic game), DynamoDB (lưu dữ liệu người chơi, trận đấu, bộ bài), Amazon SQS (xử lý tác vụ hậu kỳ), CloudWatch và X-Ray (giám sát), AWS WAF (bảo mật). Frontend sử dụng React kết nối WebSocket để đồng bộ trạng thái trận đấu theo thời gian thực.
 
 ### 5. Lộ trình & Mốc triển khai  
-- *Trước thực tập (Tháng 0)*: 1 tháng lên kế hoạch và đánh giá trạm cũ.  
-- *Thực tập (Tháng 1–3)*:  
-    - Tháng 1: Học AWS và nâng cấp phần cứng.  
+- *Trước thực tập (Tháng 0)*: 1 tháng lên kế hoạch.
+    - Tháng 1: Tìm hiểu và học các dịch vụ AWS, thực hành các bài Lab để cũng cố kiến thức.  
     - Tháng 2: Thiết kế và điều chỉnh kiến trúc.  
     - Tháng 3: Triển khai, kiểm thử, đưa vào sử dụng.  
-- *Sau triển khai*: Nghiên cứu thêm trong vòng 1 năm.  
+- *Sau triển khai*: Nghiên cứu và phát triển thêm các chức năng mới. 
 
-### 6. Ước tính ngân sách  
-Có thể xem chi phí trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01)  
-Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.pdf).  
+### 6. Ước tính ngân sách   
 
 *Chi phí hạ tầng*  
-- AWS Lambda: 0,00 USD/tháng (1.000 request, 512 MB lưu trữ).  
-- S3 Standard: 0,15 USD/tháng (6 GB, 2.100 request, 1 GB quét).  
-- Truyền dữ liệu: 0,02 USD/tháng (1 GB vào, 1 GB ra).  
-- AWS Amplify: 0,35 USD/tháng (256 MB, request 500 ms).  
-- Amazon API Gateway: 0,01 USD/tháng (2.000 request).  
-- AWS Glue ETL Jobs: 0,02 USD/tháng (2 DPU).  
-- AWS Glue Crawlers: 0,07 USD/tháng (1 crawler).  
-- MQTT (IoT Core): 0,08 USD/tháng (5 thiết bị, 45.000 tin nhắn).  
+- AWS Amplify: 0,00 - 0,02 USD/tháng (Hosting khoảng 500 MB, CI/CD vài lần triển khai, nằm trong Free Tier 12 tháng).
 
-*Tổng*: 0,7 USD/tháng, 8,40 USD/12 tháng  
-- *Phần cứng*: 265 USD một lần (Raspberry Pi 5 và cảm biến).  
+- Amazon Route 53: 0,50 USD/tháng (01 Hosted Zone, chưa tính phí tên miền).
+
+- Amazon Cognito: 0,00 USD/tháng (≤ 10 người dùng, nằm trong Free Tier MAU).
+
+- Amazon API Gateway (WebSocket): 0,00 - 0,02 USD/tháng (~20.000 WebSocket messages và thời gian kết nối thấp, trong Free Tier).
+
+- AWS Lambda: 0,00 USD/tháng (~50.000 requests, 512 MB, dưới Free Tier 1 triệu requests và 400.000 GB-s).
+
+- Amazon DynamoDB: 0,00 USD/tháng (≈1 GB dữ liệu, chọn chế độ Provisioned 25 WCU/RCU để đạt 0 USD trong Free Tier).
+
+- Amazon SQS: 0,00 USD/tháng (~10.000 messages, dưới Free Tier).
+
+- Amazon CloudWatch: 0,00 USD/tháng (≈1 GB log lưu trữ, dưới ngưỡng 5 GB miễn phí/tháng).
+
+- AWS X-Ray: 0,00 USD/tháng (khối lượng trace thấp, trong Free Tier).
+
+- AWS KMS: 0,00 USD/tháng (sử dụng khóa do AWS quản lý).
+
+- AWS Systems Manager Parameter Store: 0,00 USD/tháng (Thay thế Secrets Manager để lưu 01 Secret hoàn toàn miễn phí).
+
+- Truyền dữ liệu Internet: 0,00 USD/tháng (~1 GB Data Transfer Out, dưới ngưỡng 100 GB miễn phí/tháng).
+
+- AWS WAF: 0,00 USD/tháng (nếu tạm tắt) / ≥ 5,00 USD/tháng (nếu bật 01 Web ACL để lọc các request độc hại)
+
+*Tổng chi phí*:
+- Chi phí hạ tầng MVP (Chưa tính WAF): khoảng 0,54 USD/tháng (~6,5 USD/năm).
+
+- Chi phí hạ tầng MVP (Có WAF): khoảng 5,54 USD/tháng (~66,5 USD/năm).    
 
 ### 7. Đánh giá rủi ro  
 *Ma trận rủi ro*  
-- Mất mạng: Ảnh hưởng trung bình, xác suất trung bình.  
-- Hỏng cảm biến: Ảnh hưởng cao, xác suất thấp.  
-- Vượt ngân sách: Ảnh hưởng trung bình, xác suất thấp.  
+- Lambda Cold Start gây giật lag lượt đi đầu: Khả năng xảy ra trung bình, mức độ ảnh hưởng trung bình.  
+
+- Mất kết nối mạng WebSocket từ phía người chơi: Khả năng xảy ra cao, mức độ ảnh hưởng cao.  
+
+- Chạm giới hạn AWS Quota: Khả năng xảy ra thấp, mức độ ảnh hưởng rất cao.
 
 *Chiến lược giảm thiểu*  
-- Mạng: Lưu trữ cục bộ trên Raspberry Pi với Docker.  
-- Cảm biến: Kiểm tra định kỳ, dự phòng linh kiện.  
-- Chi phí: Cảnh báo ngân sách AWS, tối ưu dịch vụ.  
+- Giảm thiểu Lambda Cold Start: Tối ưu thời gian khởi động bằng cách giảm kích thước package, tái sử dụng kết nối và chỉ cấu hình Provisioned Concurrency cho các Lambda xử lý thời gian thực (Process Game Engine) khi hệ thống có lưu lượng truy cập cao. Giải pháp này giúp giảm đáng kể độ trễ ở lượt đi đầu tiên nhưng vẫn tối ưu chi phí vận hành.
+
+- Giảm thiểu mất kết nối WebSocket: Xây dựng cơ chế Auto-Reconnect ở Frontend kết hợp gửi cảnh báo định kỳ để phát hiện mất kết nối. Khi người chơi kết nối lại, API Gateway và Lambda cập nhật Connection ID mới vào DynamoDB, sau đó đồng bộ lại Game State hiện tại để người chơi tiếp tục trận đấu mà không cần tạo phiên mới.
+
+- Giảm thiểu chạm giới hạn AWS Quota: Thiết lập CloudWatch Metrics và CloudWatch Alarms để giám sát số lượng kết nối WebSocket, Lambda Invocations và các tài nguyên quan trọng. Khi tài nguyên đạt khoảng 70–80% giới hạn, hệ thống gửi cảnh báo qua email để quản trị viên chủ động yêu cầu tăng hạn mức trước khi ảnh hưởng đến người dùng. 
 
 *Kế hoạch dự phòng*  
-- Quay lại thu thập thủ công nếu AWS gặp sự cố.  
-- Sử dụng CloudFormation để khôi phục cấu hình liên quan đến chi phí.  
+- Mở rộng tài nguyên: Khi tài nguyên AWS tiệm cận Service Quota, quản trị viên yêu cầu tăng hạn mức và tạm thời giới hạn tạo trận đấu mới, ưu tiên tài nguyên cho các trận đang diễn ra nhằm đảm bảo tính ổn định của hệ thống.  
 
 ### 8. Kết quả kỳ vọng  
-*Cải tiến kỹ thuật*: Dữ liệu và phân tích thời gian thực thay thế quy trình thủ công. Có thể mở rộng tới 10–15 trạm.  
-*Giá trị dài hạn*: Nền tảng dữ liệu 1 năm cho nghiên cứu AI, có thể tái sử dụng cho các dự án tương lai.
+- *Cải tiến kỹ thuật*: Xây dựng thành công luồng Game Engine hoàn toàn trên nền tảng Serverless, thay thế máy chủ duy trì liên tục giúp tiết kiệm chi phí. 
+
+- *Giá trị dài hạn*: Nền tảng dữ liệu dùng để phát triển game, có thể tái sử dụng cho các dự án tương lai.

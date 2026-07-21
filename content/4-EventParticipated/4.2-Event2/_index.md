@@ -6,121 +6,80 @@ chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy it verbatim** into your report, including this warning.
-{{% /notice %}}
 
-# Summary Report: “GenAI-powered App-DB Modernization workshop”
+# Reflection on "FCAJ Community Day"
 
-### Event Objectives
+### Purpose of the Event
 
-- Share best practices in modern application design
-- Introduce Domain-Driven Design (DDD) and event-driven architecture
-- Provide guidance on selecting the right compute services
-- Present AI tools to support the development lifecycle
+- The event was organized to share in-depth knowledge, real-world experience, and the latest technology trends in Cloud (AWS), Artificial Intelligence (AI), DevOps, game development, as well as career development guidance and teamwork skills in the IT industry.
 
-### Speakers
+### Speaker List
 
-- **Jignesh Shah** – Director, Open Source Databases
-- **Erica Liu** – Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** – Assc. Specialist SA, Serverless Amazon Web Services
+- **Le Hoang Gia Dai** - Final-year student at HUTECH University
+- **Bao Huynh** - Junior Cloud Native Developer at Endava Vietnam, Founder of ITea Lab
+- **Tran Trung Vinh** - System Administrator at Central Retail Group
+- **Nguyen Quoc Bao** - Speaker on Godot & AWS WebSockets
+- **Truong Huy Phuoc** - Speaker on Teamwork Skills
+- **Viet Phat** - AI student at Swinburne University
 
-### Key Highlights
+### Highlights
 
-#### Identifying the drawbacks of legacy application architecture
+#### AWS WAF & ML NIDS
+- Combining a Web Application Firewall (AWS WAF) with a Machine Learning-based Network Intrusion Detection System (NIDS) to overcome the limitations of traditional rule-based systems, enabling detection of previously unseen attacks based on network behavior.
+- Training the model with the CSE-CIC-IDS2018 dataset and deploying the architecture on AWS.
 
-- Long product release cycles → Lost revenue/missed opportunities  
-- Inefficient operations → Reduced productivity, higher costs  
-- Non-compliance with security regulations → Security breaches, loss of reputation  
+#### Docker
+- Introduction to Containerization technology (Docker) and comparison with traditional Virtualization (VMs).
+- Docker offers the benefits of being lightweight, running consistently across multiple environments, and being ideal for Microservices or CI/CD architectures.
 
-#### Transitioning to modern application architecture – Microservices
+#### Journey from IT Helpdesk to Senior Sysadmin
+- Sharing practical experience advancing in the system administration profession, emphasizing the importance of understanding Linux, Networking, and automation.
+- Providing a roadmap toward DevOps/Cloud, including Git, Terraform, Docker, Kubernetes, and an operational mindset.
 
-Migrating to a modular system — each function is an **independent service** communicating via **events**, built on three core pillars:
+#### Multiplayer in the Cloud with Godot 
+- Guided how to build a multiplayer game architecture using Godot 4 combined with AWS WebSockets (API Gateway, Lambda, DynamoDB).
+- Compared network architectures and highlighted the limitations of Serverless architecture versus dedicated servers like AWS GameLift.
 
-- **Queue Management**: Handle asynchronous tasks  
-- **Caching Strategy**: Optimize performance  
-- **Message Handling**: Flexible inter-service communication  
+#### GraphRAG Architecture
+- Introduced the GraphRAG method (using knowledge graphs to improve RAG), enabling AI models to perform multi-hop reasoning.
+- Guided how to build GraphRAG on AWS in 2 ways: fully managed (Amazon Bedrock, Neptune Analytics) or self-built (LlamaIndex, Amazon Neptune).
 
-#### Domain-Driven Design (DDD)
+#### The Art of Teamwork
+- Proposed 4 principles in teamwork: Clear and shared objectives, the right person for the right role, open communication and active listening, and individual accountability.
+- Suggested using digital tools like Trello, ClickUp, Slack, and Discord to optimize work performance.
 
-- **Four-step method**: Identify domain events → arrange timeline → identify actors → define bounded contexts  
-- **Bookstore case study**: Demonstrates real-world DDD application  
-- **Context mapping**: 7 patterns for integrating bounded contexts  
+### Lessons Learned
 
-#### Event-Driven Architecture
+- Learned how network architecture and cloud services (AWS) are being widely applied across many fields: from cybersecurity (NIDS), AI development (GraphRAG), to game infrastructure (Multiplayer).
+- From a systems perspective, gained a clear understanding of the advantages of Docker over traditional VMs and the step-by-step roadmap from an IT technician to a Cloud/DevOps Engineer.
+- Beyond technical skills, also learned how to think about system operations, how to prepare effectively for interviews, and team collaboration skills.
 
-- **3 integration patterns**: Publish/Subscribe, Point-to-point, Streaming  
-- **Benefits**: Loose coupling, scalability, resilience  
-- **Sync vs async comparison**: Understanding the trade-offs  
 
-#### Compute Evolution
 
-- **Shared Responsibility Model**: EC2 → ECS → Fargate → Lambda  
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value  
-- **Functions vs Containers**: Criteria for appropriate choice  
+### Application to Work
+- Using Docker: Apply Docker to development and testing environments, or to CI/CD pipelines to ensure applications run consistently on all machines, avoiding environment conflict errors.
+- Improving security: Consider integrating machine learning with existing firewall services to proactively analyze logs and detect unusual access behaviors that traditional WAF cannot catch.
+- Enhancing team performance: Apply the 4 golden principles and set up tools like Trello and Slack to manage progress and communicate more clearly within the project team.
 
-#### Amazon Q Developer
+### Experience at the Event
 
-- **SDLC automation**: From planning to maintenance  
-- **Code transformation**: Java upgrade, .NET modernization  
-- **AWS Transform agents**: VMware, Mainframe, .NET migration  
+Attending the **"FCAJ Community Day"** workshop was a very rewarding experience, giving me a comprehensive view of how to modernize applications and databases using modern methods and tools. Some notable highlights:
 
-### Key Takeaways
+#### Learning from Highly Experienced Speakers
+- The event provided the opportunity to absorb knowledge from experienced engineers at major companies (such as Central Retail Group, Endava) as well as talented tech students, offering a very practical perspective on career paths and technology.
 
-#### Design Mindset
+#### Hands-on Technical Experience
+- All speakers provided clear illustrations such as system architecture diagrams on AWS, network model comparison tables, and even live demonstrations of how to connect two client streams in Godot or how to run Docker, turning theory into a tangible experience.
 
-- **Business-first approach**: Always start from the business domain, not the technology  
-- **Ubiquitous language**: Importance of a shared vocabulary between business and tech teams  
-- **Bounded contexts**: Identifying and managing complexity in large systems  
+#### Application of Modern Tools
+- The event broadened my awareness of a host of cutting-edge tools and services currently available, including AWS Bedrock, Neptune Analytics, AWS Lambda, DynamoDB, LlamaIndex, Docker, and Terraform.
 
-#### Technical Architecture
+#### Networking and Exchange
+- Throughout the event, especially at the end of each presentation, there were Q&A sessions and QR codes so attendees could connect with speakers via social media (LinkedIn), creating a vibrant networking environment.
 
-- **Event storming technique**: Practical method for modeling business processes  
-- Use **event-driven communication** instead of synchronous calls  
-- **Integration patterns**: When to use sync, async, pub/sub, streaming  
-- **Compute spectrum**: Criteria for choosing between VM, containers, and serverless  
+#### Takeaways
+- Very insightful career advice was shared: practical experience is more valuable than certifications, data quality determines the success or failure of a machine learning system, do not study too many things at once but focus on going deep into 1-2 core skills first, and "no matter where you start, every small step forward has value."
 
-#### Modernization Strategy
-
-- **Phased approach**: No rushing — follow a clear roadmap  
-- **7Rs framework**: Multiple modernization paths depending on the application  
-- **ROI measurement**: Cost reduction + business agility  
-
-### Applying to Work
-
-- **Apply DDD** to current projects: Event storming sessions with business teams  
-- **Refactor microservices**: Use bounded contexts to define service boundaries  
-- **Implement event-driven patterns**: Replace some sync calls with async messaging  
-- **Adopt serverless**: Pilot AWS Lambda for suitable use cases  
-- **Try Amazon Q Developer**: Integrate into the dev workflow to boost productivity  
-
-### Event Experience
-
-Attending the **“GenAI-powered App-DB Modernization”** workshop was extremely valuable, giving me a comprehensive view of modernizing applications and databases using advanced methods and tools. Key experiences included:
-
-#### Learning from highly skilled speakers
-- Experts from AWS and major tech organizations shared **best practices** in modern application design.  
-- Through real-world case studies, I gained a deeper understanding of applying **DDD** and **Event-Driven Architecture** to large projects.  
-
-#### Hands-on technical exposure
-- Participating in **event storming** sessions helped me visualize how to **model business processes** into domain events.  
-- Learned how to **split microservices** and define **bounded contexts** to manage large-system complexity.  
-- Understood trade-offs between **synchronous and asynchronous communication** and integration patterns like **pub/sub, point-to-point, streaming**.  
-
-#### Leveraging modern tools
-- Explored **Amazon Q Developer**, an AI tool for SDLC support from planning to maintenance.  
-- Learned to **automate code transformation** and pilot serverless with **AWS Lambda** to improve productivity.  
-
-#### Networking and discussions
-- The workshop offered opportunities to exchange ideas with experts, peers, and business teams, enhancing the **ubiquitous language** between business and tech.  
-- Real-world examples reinforced the importance of the **business-first approach** rather than focusing solely on technology.  
-
-#### Lessons learned
-- Applying DDD and event-driven patterns reduces **coupling** while improving **scalability** and **resilience**.  
-- Modernization requires a **phased approach** with **ROI measurement**; rushing the process can be risky.  
-- AI tools like Amazon Q Developer can significantly **boost productivity** when integrated into the current workflow.  
-
-#### Some event photos
-*Add your event photos here*  
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+#### Some photos from the event
+![Event2](/images/4-Events/Event2.png)
+![Event2](/images/4-Events/Event2b.png)

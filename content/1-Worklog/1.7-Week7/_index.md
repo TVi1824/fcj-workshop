@@ -1,57 +1,38 @@
 ---
-title: "Week 7 Worklog"
+title: "Worklog Week 7"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
 
-### Week 7 Objectives:
+### Week 7 Goals:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Master enterprise-grade container orchestration with AWS's comprehensive container service ecosystem, from lightweight container deployment to complex Kubernetes orchestration.
+* Learn to design, deploy, and manage containerized applications at scale using AWS ECS, EKS, and Fargate.  
+* Address real-world container challenges including service mesh, security, monitoring, and CI/CD pipeline integration.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to Complete This Week:
+| Day | Tasks                                                                                                                                                                                                                              | Start Date   | End Date        | Reference                                              |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ------------------------------------------------------ |
+| 2   | - Study and do Lab: <br>&emsp; + Optimize container image size and manage registries <br>&emsp; + Configure and run a container application on Amazon Lightsail Containers <br>                                                      | 15/06/2026   | 15/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
+| 3   | - Study and do Lab: <br>&emsp; + Amazon ECS & Monolith to Microservices Migration <br>&emsp; + Use Docker combined with AWS Fargate to run and auto-scale containers in a serverless model <br>&emsp; + Configure Task Definitions, set up services, and manage clusters on Amazon ECS in detail <br> | 16/06/2026   | 16/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
+| 4   | - Practice initializing and setting up a standard Kubernetes cluster on AWS using Amazon EKS <br> - Practice configuring cluster networking, installing necessary add-ons, and deploying workloads (pods, deployments, services) to the EKS environment <br> | 17/06/2026   | 17/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
+| 5   | - Study and do Lab: <br>&emsp; + Set up a fully automated CI/CD pipeline with AWS CodePipeline <br>&emsp; + Configure webhooks to link source code from a GitHub repository <br>                                                      | 18/06/2026   | 18/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
+| 6   | - Study and do Lab: <br>&emsp; + Configure a Service Mesh system to manage traffic and encrypt communication between microservices <br>&emsp; + Set up runtime protection layers and assess the security compliance of the entire system <br> | 19/06/2026   | 19/06/2026      | https://cloudjourney.awsstudygroup.com/vi/5-container/ |
 
 
-### Week 7 Achievements:
+### Week 7 Results Achieved:
+* Mastered the fundamentals of running Docker in a cloud environment and optimized container images.
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Successfully configured and managed container workloads on both Amazon ECS and Kubernetes (Amazon EKS) hands-on.
 
-* Successfully created and configured an AWS Free Tier account.
+* Experienced firsthand the power of AWS Fargate in running containers without worrying about the underlying server infrastructure.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Successfully set up a smooth CI/CD pipeline from GitHub directly to the EKS environment using CodePipeline.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Achieved enterprise security standards for containers through vulnerability scanning, runtime protection, and traffic management with Service Mesh.
 
-* Used AWS CLI to perform basic operations such as:
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...

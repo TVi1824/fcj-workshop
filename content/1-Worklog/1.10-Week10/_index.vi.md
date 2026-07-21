@@ -5,55 +5,33 @@ weight: 2
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 
 ### Mục tiêu tuần 10:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Khởi tạo dự án Chrono Genesis Game (Web game đối kháng turn-base trading cards game).  
+* Hoàn thiện thiết kế kiến trúc Serverless Real-time Architecture trên nền tảng AWS và triển khai các lớp nền tảng (Edge, Auth, Data, Security)
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Lên ý tưởng và vẽ sơ đồ kiến trúc Serverless Real-time cho Chrono Genesis Game <br>                                                                                             | 06/07/2026   | 06/07/2026      |
+| 3   | - Cấu hình Amazon Route 53 để quản lý tên miền và định tuyến người chơi truy cập vào hệ thống <br> - Tích hợp AWS WAF để lọc các request độc hại và bảo vệ hệ thống. <br> - Thiết lập AWS Amplify Hosting để lưu trữ tài nguyên tĩnh, tự động hóa CI/CD và phân phối giao diện React/TypeScript toàn cầu. <br>                 | 07/07/2026   | 07/07/2026      
+| 4   | - Cấu hình Amazon Cognito để quản lý tài khoản người chơi, xử lý đăng nhập và phát hành JWT Token. <br> - Khởi tạo Amazon API Gateway (WebSocket API) kết hợp Lambda Authorizer. | 08/07/2026   | 08/07/2026     
+| 5   | - Cấu hình 5 bảng chuyên biệt trên Amazon DynamoDB. <br>                  | 09/07/2026   | 10/07/2026      
+| 6   | - Sử dụng AWS IAM để thiết lập quyền truy cập giữa các dịch vụ và dùng AWS KMS để mã hóa dữ liệu lưu trên DynamoDB. <br> - Tích hợp AWS X-Ray để theo dõi toàn bộ luồng xử lý request giữa API Gateway và Lambda.                                                                                         | 10/07/2026   | 10/07/2026      
 
 
 ### Kết quả đạt được tuần 10:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Hoàn thiện sơ đồ thiết kế tổng quan và phân lớp kiến trúc Serverless Real-time Architecture cho dự án Web game đối kháng (turn-base trading cards game) trên AWS.  
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Triển khai thành công lớp phân phối nội dung (Edge Layer) với Amazon Route 53, AWS WAF và AWS Amplify Hosting, đảm bảo phân phối giao diện React/TypeScript và tài nguyên tĩnh toàn cầu một cách tự động và an toàn.  
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Thiết lập hệ thống định danh người dùng bằng Amazon Cognito và cấu hình thành công Amazon API Gateway (WebSocket API) để duy trì kết nối thời gian thực bằng Connection ID.  
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+* Khởi tạo thành công lớp lưu trữ dữ liệu trung tâm bằng Amazon DynamoDB với 5 bảng chuyên biệt đáp ứng yêu cầu đọc/ghi dữ liệu.
+  
+* Tích hợp thành công các dịch vụ bảo mật (IAM, KMS) để quản lý quyền và mã hóa dữ liệu, đồng thời thiết lập nền tảng giám sát với CloudWatch và X-Ray. 
 
 

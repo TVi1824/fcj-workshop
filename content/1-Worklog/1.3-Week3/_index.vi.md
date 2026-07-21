@@ -5,55 +5,32 @@ weight: 1
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 
 ### Mục tiêu tuần 3:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Nắm bắt chiến lược dịch chuyển đám mây liền mạch, biết cách đánh giá workload và lập kế hoạch dịch chuyển.
+* Phát triển chuyên môn về dịch chuyển máy chủ ảo và ứng dụng từ môi trường ảo hóa on-premises sang Amazon EC2.
+* Hiểu và thực hiện dịch chuyển cơ sở dữ liệu với thời gian ngừng tối thiểu (minimal downtime) bằng AWS DMS và công cụ SCT.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Tìm hiểu chiến lược dịch chuyển máy chủ và ứng dụng <br> - Chuẩn bị máy ảo: Cài đặt sẵn AWS CLI và một môi trường ảo hóa VMware Workstation trên máy tính cục bộ <br>                                            | 18/05/2026   | 18/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/2-migrate/> |
+| 3   | - Thực hành dịch vụ AWS VM Import/Export <br>&emsp; + Import máy ảo vào AWS <br>&emsp; + Export EC2 Instance từ AWS <br> - Tìm hiểu dịch vụ lưu trữ đối tượng Amazon S3 <br>                                          | 19/05/2026   | 19/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/2-migrate/> |
+| 4   | - Thực hành dịch chuyển cơ sở dữ liệu <br> - Thực hiện chuyển đổi lược đồ với AWS Schema Conversion Tool (SCT) <br> | 20/05/2026   | 20/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/2-migrate/> |
+| 5   | - Thực hành di dời dữ liệu với AWS Database Migration Service (DMS) <br> - Tìm hiểu Serverless replication   <br>                  | 21/05/2026   | 21/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/2-migrate/> |
+| 6   | - Tối ưu hóa và xác thực sau dịch chuyển <br> - Xử lý sự cố với AWS DMS và giảm thiểu rủi ro (quy trình rollback)                                                                                         | 22/05/2026   | 22/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/2-migrate/> |
 
 
 ### Kết quả đạt được tuần 3:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Nắm vững các bước lập kế hoạch, đánh giá workload và thiết lập kết nối mạng trong các giai đoạn dịch chuyển.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Có khả năng sao lưu máy ảo vào EC2 hoặc tạo một kho lưu trữ các máy ảo để dự phòng và phục hồi sau sự cố thông qua VM Import/Export mà không bị thu phí dịch vụ.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Sử dụng thành thạo AWS SCT để tự động chuyển đổi phần lớn các đối tượng mã cơ sở dữ liệu không đồng nhất sang định dạng tương thích với cơ sở dữ liệu đích.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+* Thực hiện thành công việc di dời dữ liệu một cách dễ dàng và an toàn bằng AWS DMS, duy trì cơ sở dữ liệu nguồn hoạt động đầy đủ trong quá trình di chuyển để giảm thiểu thời gian chết (downtime)
 
 

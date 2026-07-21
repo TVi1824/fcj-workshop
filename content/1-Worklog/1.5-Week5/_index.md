@@ -1,57 +1,38 @@
 ---
-title: "Week 5 Worklog"
+title: "Worklog Week 5"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
 
-### Week 5 Objectives:
+### Week 5 Goals:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Transform basic AWS deployments into robust, scalable, and cost-efficient solutions that meet enterprise standards.
+* Reliability: High availability, disaster recovery, and fault tolerance.
+* Performance: Auto-scaling, caching, and resource optimization.
+* Cost optimization: Right-sizing, reserved capacity, and spend analysis.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to Complete This Week:
+| Day | Tasks                                                                                                                                                                                                                                | Start Date   | End Date        | Reference                                              |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | --------------- | ------------------------------------------------------ |
+| 2   | - Study and do Lab: <br>&emsp; + Deploy a system backup plan with AWS Backup <br>&emsp; + Connect VPCs with VPC Peering <br>&emsp; + Centrally manage connections with AWS Transit Gateway <br>                                        | 01/06/2026   | 01/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 3   | - Study and do Lab: <br>&emsp; + Leverage hands-on experience to deploy applications with Docker <br>&emsp; + Deploy an application to Amazon ECS <br>&emsp; + Automate application deployment with AWS CodePipeline <br>             | 02/06/2026   | 02/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 4   | - Study and do Lab: <br>&emsp; + Store unlimited data on AWS with File Storage Gateway <br>&emsp; + Deploy a shared Windows storage repository using FSx <br>                                                                          | 03/06/2026   | 03/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 5   | - Study and do Lab: <br>&emsp; + Build a Data Lake on AWS <br>&emsp; + Advanced architecture with Amazon DynamoDB <br>&emsp; + Optimize costs with Savings Plans, Reserved Instances, and Reserved DB Instances <br>                  | 04/06/2026   | 04/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 6   | - Study and do Lab: <br>&emsp; + Right-size servers with Amazon EC2 Resource Optimization <br>&emsp; + Visualize AWS usage costs <br>&emsp; + Advanced cost analysis with AWS Glue and Amazon Athena <br>                             | 05/06/2026   | 05/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
 
 
-### Week 5 Achievements:
+### Week 5 Results Achieved:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Successfully built a data backup strategy and complex interconnected network architecture with VPC Peering and Transit Gateway to improve reliability.
 
-* Successfully created and configured an AWS Free Tier account.
+* Packaged, deployed, and automated the delivery pipeline of containerized applications using Docker, ECS, and CodePipeline.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Set up diverse high-performance data storage and management solutions (File Storage Gateway, FSx, Data Lake, DynamoDB).
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Analyzed, visualized, and applied compute cost-saving strategies (Reserved, Savings Plans, Resource Optimization).
 
-* Used AWS CLI to perform basic operations such as:
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...

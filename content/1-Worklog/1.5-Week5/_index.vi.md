@@ -5,55 +5,33 @@ weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 
 ### Mục tiêu tuần 5:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Chuyển đổi các triển khai AWS cơ bản thành các giải pháp mạnh mẽ, có thể mở rộng và hiệu quả về chi phí đáp ứng các tiêu chuẩn doanh nghiệp.
+* Độ tin cậy: Tính khả dụng cao, khôi phục thảm họa và khả năng chịu lỗi.
+* Hiệu suất: Auto-scaling, caching và tối ưu hóa tài nguyên.
+* Tối ưu chi phí: Right-sizing, dung lượng dự trữ và phân tích chi tiêu.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Tìm hiểu và làm Lab: <br>&emsp; + Triển khai kế hoạch sao lưu hệ thống với AWS Backup <br>&emsp; + Liên kết các VPC với VPC Peering <br>&emsp; + Quản lý tập trung các kết nối với AWS Transit Gateway <br>                                            | 01/06/2026   | 01/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 3   | - Tìm hiểu và làm Lab: <br>&emsp; + Tận dụng kinh nghiệm thực tế để triển khai Ứng dụng với Docker <br>&emsp; + Triển khai Ứng dụng lên Amazon ECS <br>&emsp; + Tự động hóa Triển khai Ứng dụng với AWS CodePipeline <br>                                            | 02/06/2026   | 02/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 4   | - Tìm hiểu và làm Lab: <br>&emsp; + Lưu trữ dữ liệu không giới hạn trên AWS với File Storage Gateway<br>&emsp; + Triển khai Kho lưu trữ chung cho Windows sử dụng FSx <br>                                            | 03/06/2026   | 03/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 5   | - Tìm hiểu và làm Lab: <br>&emsp; + Xây dựng Data lake trên AWS <br>&emsp; + Kiến trúc nâng cao với Amazon DynamoDB <br>&emsp; + Tối ưu chi phí với Savings Plans, Reserved Instance, Reserved DB Instance <br>                                            | 04/06/2026   | 04/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 6   | - Tìm hiểu và làm Lab: <br>&emsp; + Lựa chọn kích thước máy chủ phù hợp với Amazon EC2 Resource Optimization <br>&emsp; + Trực quan hóa Chi phí sử dụng trên AWS <br>&emsp; + Phân tích chi phí sử dụng nâng cao với AWS Glue và Amazon Athena <br>                                            | 05/06/2026   | 05/06/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
 
 
 ### Kết quả đạt được tuần 5:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Xây dựng thành công chiến lược sao lưu dữ liệu và kiến trúc mạng liên kết phức tạp với VPC Peering và Transit Gateway để tăng độ tin cậy.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Đóng gói, triển khai và tự động hóa quy trình phân phối ứng dụng containerized bằng Docker, ECS và CodePipeline.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Thiết lập đa dạng các giải pháp lưu trữ và quản lý dữ liệu hiệu suất cao (File Storage Gateway, FSx, Data Lake, DynamoDB).
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+* Phân tích, trực quan hóa và áp dụng các chiến lược tiết kiệm chi phí tính toán (Reserved, Savings Plans, Resource Optimization).
 
 

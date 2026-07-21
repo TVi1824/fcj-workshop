@@ -5,111 +5,146 @@ weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
+# Chrono Genesis Game  
+## A Turn-Based Trading Card Web Game Built on a Serverless Architecture on AWS
 
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+### 1. Executive Summary  
+The project is Chrono Genesis Game, a turn-based trading card web game built on a Serverless Real-time Architecture on AWS.
 
-### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+The entire game uses WebSocket to synchronize data in real time. Match business logic is handled by multiple specialized AWS Lambda functions. The system uses Amazon DynamoDB exclusively as a comprehensive data center, serving two roles: storing match state (Game State) with millisecond-level latency in real time, while also securely and cost-efficiently storing persistent data (User, Deck, Match History, Logs).
 
-### 2. Problem Statement
-### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
 
-### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+### 2. Problem Statement  
+*Current Problems*  
+- Traditional real-time game systems require continuous server maintenance costs even when there are no players.
 
-### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+- Network latency negatively impacts the experience of games that require constant tactical calculation.
 
-### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
+*Solution*  
+Deploy a Serverless Real-time Architecture via Amazon API Gateway (WebSocket API) and AWS Lambda functions to create independent processing flows. Converge to a single Game Engine flow that interacts directly with Amazon DynamoDB to update state, ensuring low latency and cost savings.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+### 3. Solution Architecture  
+The platform applies AWS Serverless architecture to operate a real-time turn-based trading card web game, capable of automatically scaling to support thousands of simultaneous players. The user interface is distributed via AWS Amplify and Route 53, secured and authenticated by Amazon Cognito.
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+Real-time bidirectional connections (WebSocket) are routed through Amazon API Gateway to interact directly with a set of AWS Lambda functions (Start Match, Process Game Engine, Save Deck, Handle Timeout, End Match) to handle all centralized game logic.
 
-### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+Game data and connection information are stored in Amazon DynamoDB. Additionally, after a match ends, events are pushed to Amazon SQS for a Lambda function (Post Match Worker) to asynchronously process tasks such as updating Rank, EXP, and saving match history, ensuring high performance and ultra-low latency.  
 
-### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+![IoT Weather Station Architecture](/images/2-Proposal/architecture.png)
 
-### 4. Technical Implementation
-**Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
 
-**Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+*AWS Services Used*  
+- *AWS Amplify*: Hosts and distributes the web game interface (React/TypeScript), automates CI/CD.
 
-### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+- *AWS Lambda*: Processes data and triggers Glue jobs (2 functions).  
 
-### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
+- *Amazon Route 53*: Communicates with the web application.  
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+- *Amazon S3*: Manages domain names and routes player traffic to the application.  
 
-Total: $0.7/month, $8.40/12 months
+- *Amazon Cognito*: Authenticates player identities, manages login sessions, and issues JWT Tokens. 
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+- *Amazon API Gateway (WebSocket API)*: Manages real-time bidirectional connections between the Client and Server.
 
-### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
+- *AWS Lambda*: Handles centralized game logic and computation tasks.
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+- *Amazon SQS*: An asynchronous queue that receives data from the Lambda Engine and processes it.
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+- *Amazon DynamoDB*: A NoSQL database storing match state, connection information, and user data.
 
-### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+- *Security & Monitoring (IAM, KMS, Secrets Manager, CloudWatch, X-Ray)*: Authorization security, key management, log tracking, and system performance monitoring.
+
+*Component Design*  
+- *Real-time routing*: Amazon API Gateway combined with Route 53 manages bidirectional WebSocket connections between players and the system.   
+
+- *Game logic processing*: A set of AWS Lambda functions acting as a centralized Game Engine.
+
+- *Asynchronous processing*: Amazon SQS receives match-end events for a Lambda worker to automatically calculate Rank, EXP, and save history.
+
+- *Data processing*: Amazon DynamoDB stores board state, connection information, and player profiles.  
+
+- *Web interface*: Built with React / TypeScript, packaged and distributed via AWS Amplify's CDN network.
+
+- *User management*: Uses Amazon Cognito User Pool to manage the full account lifecycle (registration, authentication, password change, and session revocation).
+
+### 4. Technical Implementation  
+*Deployment Phases*  
+1. Infrastructure initialization: Deploy the environment, domain, and set up CI/CD via AWS Amplify.
+
+2. Connection & Authentication: Configure Amazon Cognito for users and establish the WebSocket connection flow via API Gateway.
+
+3. Game Engine Development: Program core Lambda functions (Start Match, Process Action, End Match) to handle card game logic.
+
+4. Post-match processing: Configure the SQS queue and Lambda Worker to handle Rank scores and history without causing system bottlenecks.
+
+5. Testing & Optimization: Monitor with X-Ray, CloudWatch, optimize security with WAF/IAM, and perform load testing (Stress Test).
+
+*Technical Requirements*  
+- *System Infrastructure*: AWS Amplify (Hosting & CI/CD), GitHub, Route 53 (domain), IAM and VPC for system deployment, management, and security.  
+
+- *Game Platform*: Amazon Cognito (JWT authentication), API Gateway (WebSocket), AWS Lambda (game logic processing), DynamoDB (storing player data, matches, and decks), Amazon SQS (post-match task processing), CloudWatch and X-Ray (monitoring), AWS WAF (security). Frontend uses React connected via WebSocket to synchronize match state in real time.
+
+### 5. Roadmap & Milestones  
+- *Pre-internship (Month 0)*: 1 month of planning.
+    - Month 1: Study and learn AWS services, practice Labs to consolidate knowledge.  
+    - Month 2: Design and adjust the architecture.  
+    - Month 3: Deploy, test, and go live.  
+- *Post-deployment*: Research and develop additional new features. 
+
+### 6. Budget Estimate   
+
+*Infrastructure Costs*  
+- AWS Amplify: $0.00 – $0.02/month (Hosting ~500 MB, CI/CD a few deployments, within 12-month Free Tier).
+
+- Amazon Route 53: $0.50/month (01 Hosted Zone, excluding domain registration fee).
+
+- Amazon Cognito: $0.00/month (≤ 10 users, within Free Tier MAU).
+
+- Amazon API Gateway (WebSocket): $0.00 – $0.02/month (~20,000 WebSocket messages and low connection time, within Free Tier).
+
+- AWS Lambda: $0.00/month (~50,000 requests, 512 MB, below Free Tier of 1 million requests and 400,000 GB-s).
+
+- Amazon DynamoDB: $0.00/month (≈1 GB data, Provisioned 25 WCU/RCU mode for $0 within Free Tier).
+
+- Amazon SQS: $0.00/month (~10,000 messages, below Free Tier).
+
+- Amazon CloudWatch: $0.00/month (≈1 GB log storage, below 5 GB free/month threshold).
+
+- AWS X-Ray: $0.00/month (low trace volume, within Free Tier).
+
+- AWS KMS: $0.00/month (using AWS-managed keys).
+
+- AWS Systems Manager Parameter Store: $0.00/month (Replaces Secrets Manager to store 01 Secret completely free).
+
+- Internet Data Transfer: $0.00/month (~1 GB Data Transfer Out, below 100 GB free/month threshold).
+
+- AWS WAF: $0.00/month (if disabled) / ≥ $5.00/month (if 01 Web ACL is enabled to filter malicious requests).
+
+*Total Cost*:
+- MVP infrastructure cost (without WAF): approximately $0.54/month (~$6.50/year).
+
+- MVP infrastructure cost (with WAF): approximately $5.54/month (~$66.50/year).    
+
+### 7. Risk Assessment  
+*Risk Matrix*  
+- Lambda Cold Start causing lag on the first turn: Medium likelihood, medium impact.  
+
+- Player-side WebSocket connection drops: High likelihood, high impact.  
+
+- Hitting AWS Quota limits: Low likelihood, very high impact.
+
+*Mitigation Strategies*  
+- Mitigating Lambda Cold Start: Optimize startup time by reducing package size, reusing connections, and only configuring Provisioned Concurrency for real-time processing Lambdas (Process Game Engine) when the system has high traffic. This significantly reduces first-turn latency while still optimizing operational costs.
+
+- Mitigating WebSocket disconnections: Build an Auto-Reconnect mechanism on the Frontend combined with periodic heartbeat signals to detect connection loss. When a player reconnects, API Gateway and Lambda update the new Connection ID in DynamoDB, then re-synchronize the current Game State so the player can continue the match without creating a new session.
+
+- Mitigating AWS Quota limits: Set up CloudWatch Metrics and CloudWatch Alarms to monitor the number of WebSocket connections, Lambda Invocations, and critical resources. When resources reach approximately 70–80% of their limits, the system sends an email alert for administrators to proactively request limit increases before users are affected. 
+
+*Contingency Plan*  
+- Resource scaling: When AWS resources approach Service Quota limits, administrators request limit increases and temporarily restrict the creation of new matches, prioritizing resources for ongoing matches to ensure system stability.  
+
+### 8. Expected Outcomes  
+- *Technical improvement*: Successfully build a fully Serverless Game Engine flow, replacing continuously maintained servers to reduce costs. 
+
+- *Long-term value*: A data platform for game development that can be reused for future projects.

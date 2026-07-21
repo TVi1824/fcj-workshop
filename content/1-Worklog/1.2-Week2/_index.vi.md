@@ -5,55 +5,35 @@ weight: 1
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 
 ### Mục tiêu tuần 2:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Tìm hiểu giải pháp lưu trữ, triển khai cơ sở dữ liệu trên cloud.
+* Nắm vững cách tối ưu chi phí tính toán và tự động mở rộng quy mô hệ thống.
+* Hoàn thiện framework giám sát và thiết lập hệ thống mạng lai (hybrid DNS).
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Tìm hiểu và làm Lab: <br>&emsp; + Sử dụng Cloud IDE trên trình duyệt với AWS Cloud9 <br>&emsp; + Hosting static website với Amazon S3 <br> | 11/05/2026   | 11/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/1-explore/> |
+| 3   | - Tìm hiểu và làm Lab: Tạo cơ sở dữ liệu trên Amazon RDS <br>                                            | 12/05/2026   | 12/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/1-explore/> |
+| 4   | - Tìm hiểu và làm Lab: Tối ưu chi phí tính toán với Amazon Lightsail <br> | 13/05/2026   | 13/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/1-explore/> |
+| 5   | - Tim hiểu và làm Lab: Tạo bảng theo dõi hệ thống với Amazon Cloudwatch   <br>                  | 14/05/2026   | 15/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/1-explore/> |
+| 6   | - Thực hành thiết lập hệ thống DNS hybrid tích hợp giữa môi trường Local và Amazon VPC với Amazon Route53 <br>                                                                                        | 15/05/2026   | 15/05/2026      | <https://cloudjourney.awsstudygroup.com/vi/1-explore/> |
 
 
 ### Kết quả đạt được tuần 2:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Cấu hình và sử dụng thành thạo môi trường lập trình trực tuyến AWS Cloud9.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+* Triển khai thành công trang web tĩnh bằng dịch vụ lưu trữ Amazon S3.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+* Thiết lập và kết nối thành công với cơ sở dữ liệu quan hệ Amazon RDS.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+* Hiểu và so sánh được ưu nhược điểm, chi phí khi sử dụng Amazon Lightsail so với EC2.
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+* Cấu hình thành công nhóm Auto Scaling để hệ thống tự động co giãn tùy theo lượng truy cập.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
+* Xây dựng được dashboard giám sát tài nguyên bằng CloudWatch và cấu hình phân giải tên miền với Route53.
 

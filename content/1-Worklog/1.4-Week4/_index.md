@@ -1,57 +1,35 @@
 ---
-title: "Week 4 Worklog"
+title: "Worklog Week 4"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
 
-### Week 4 Objectives:
+### Week 4 Goals:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Enhance AWS deployments through comprehensive optimization strategies.
+* Operations: Automation, monitoring, and incident response.
+* Security: Zero-trust architecture, compliance, and threat protection.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to Complete This Week:
+| Day | Tasks                                                                                                                                                                                                                               | Start Date   | End Date        | Reference                                              |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ------------------------------------------------------ |
+| 2   | - Study and do Lab: <br>&emsp; + Auto-start/stop servers and send Slack notifications with AWS Lambda <br>&emsp; + Create a system monitoring dashboard with Amazon CloudWatch and Grafana <br>&emsp; + Manage resources by group using Tags and Resource Groups <br> | 25/05/2026   | 25/05/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 3   | - Study and do Lab: <br>&emsp; + Manage EC2 service access using Tags via IAM <br>&emsp; + Manage services and automate tasks using AWS Systems Manager <br>&emsp; + AWS Systems Manager - Session Manager <br>                        | 26/05/2026   | 26/05/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 4   | - Study and do Lab: <br>&emsp; + Provision Infrastructure as Code with AWS CloudFormation <br>&emsp; + Set up Single Sign-On (Amazon SSO) for an Organization <br>                                                                    | 27/05/2026   | 27/05/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 5   | - Study and do Lab: <br>&emsp; + Restrict User Permissions with IAM Permission Boundary <br>&emsp; + Restrict Role Switching with Conditions <br>&emsp; + Evaluate security compliance standards with AWS Security Hub <br>           | 28/05/2026   | 28/05/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
+| 6   | - Study and do Lab: <br>&emsp; + Secure Applications and APIs with AWS WAF and AWS Lambda <br>&emsp; + Manage Encryption Keys with AWS KMS <br>                                                                                       | 29/05/2026   | 29/05/2026      | https://cloudjourney.awsstudygroup.com/vi/3-optimize/ |
 
 
-### Week 4 Achievements:
+### Week 4 Results Achieved:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Successfully configured automation and system monitoring scenarios with Lambda, CloudWatch, and Grafana.
 
-* Successfully created and configured an AWS Free Tier account.
+* Mastered centralized system administration tools such as Tagging, Resource Groups, and AWS Systems Manager.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Successfully set up centralized identity management (Amazon SSO) and strict authorization with IAM Permission Boundary.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Deployed application and API protection with AWS WAF and data encryption with AWS KMS, compliant with Security Hub evaluations.
 
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...

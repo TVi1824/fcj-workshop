@@ -1,57 +1,39 @@
 ---
-title: "Week 8 Worklog"
+title: "Worklog Week 8"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
 
-### Week 8 Objectives:
+### Week 8 Goals:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Build an enterprise-scale data platform using AWS's comprehensive analytics and machine learning services.
+* Design and implement a modern data architecture, from Data Lake to real-time analytics pipelines.
+* Master the complete data journey: ingestion, processing, storage, analysis, and visualization with production-grade, scalable, and cost-optimized technical patterns.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to Complete This Week:
+| Day | Tasks                                                                                                                                                                                   | Start Date   | End Date        | Reference                                                  |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ---------------------------------------------------------- |
+| 2   | - Research standard Data Lake construction methods on AWS <br> - Practice setting up a data repository on Amazon S3 <br> - Practice S3 partitioning and governance <br>                  | 22/06/2026   | 22/06/2026      | https://cloudjourney.awsstudygroup.com/vi/6-dataandanalytic/ |
+| 3   | - Practice Data Lake with real-world data <br> - Set up a security framework, monitor compliance, and check input data quality to ensure Data Lake integrity <br>                         | 23/06/2026   | 23/06/2026      | https://cloudjourney.awsstudygroup.com/vi/6-dataandanalytic/ |
+| 4   | - Study and do Lab: <br>&emsp; + Build ETL/ELT Pipelines <br>&emsp; + Process Batch and Streaming data <br>                                                                              | 24/06/2026   | 24/06/2026      | https://cloudjourney.awsstudygroup.com/vi/6-dataandanalytic/ |
+| 5   | - Explore AWS Data Analytics Services <br> - Deploy modern cloud Data Warehouse patterns and set up real-time data analytics pipelines based on event-driven architecture <br>            | 25/06/2026   | 25/06/2026      | https://cloudjourney.awsstudygroup.com/vi/6-dataandanalytic/ |
+| 6   | - Study and do Lab: <br>&emsp; + Connect processed data sources from Data Lake/Data Warehouse to Amazon QuickSight <br>&emsp; + Data visualization <br>                                   | 26/06/2026   | 26/06/2026      | https://cloudjourney.awsstudygroup.com/vi/6-dataandanalytic/ |
 
 
-### Week 8 Achievements:
+### Week 8 Results Achieved:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Successfully built a Data Lake on Amazon S3 and learned how to manage and partition data effectively.
 
-* Successfully created and configured an AWS Free Tier account.
+* Independently moved data from a personal relational database system to the cloud and configured security and quality control layers.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+* Smoothly operated ETL/ELT pipelines to automate the processing of both static and streaming data.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+* Proficiently applied SQL on modern analytics platforms (Data Warehouse) on AWS.
 
-* Used AWS CLI to perform basic operations such as:
+* Completed the data processing cycle by successfully building intuitive dashboards and professional BI reports with Amazon QuickSight.
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+

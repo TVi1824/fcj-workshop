@@ -6,17 +6,11 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-{{% notice warning %}}  
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+###  [Blog 1 - TỐI ƯU HÓA KIẾN TRÚC LAKEHOUSE VỚI AMAZON SAGEMAKER](3.1-Blog1/)
+Blog này hướng dẫn cách kết hợp nền tảng dữ liệu Lakehouse hiện đại với dịch vụ học máy Amazon SageMaker. Qua đó, người đọc sẽ nắm được cách tối ưu hóa quy trình phân tích, xử lý dữ liệu và triển khai các mô hình AI/ML quy mô lớn một cách liền mạch, hiệu quả và tiết kiệm chi phí.
 
-Tại đây sẽ là phần liệt kê, giới thiệu các blogs mà các bạn đã đăng trên [AWS Study Group](https://www.facebook.com/groups/awsstudygroupfcj). Ví dụ:
+###  [Blog 2 - XÂY DỰNG ỨNG DỤNG CHATBOT THEO NGỮ CẢNH BẰNG AMAZON BEDROCK KNOWLEDGE BASES](3.2-Blog2/)
+Blog này này giới thiệu phương pháp xây dựng ứng dụng chatbot thông minh, có khả năng hiểu và trả lời theo ngữ cảnh thông qua Amazon Bedrock Knowledge Bases. Giúp mình hiểu được cách kết nối dữ liệu nội bộ của doanh nghiệp với các Mô hình LLM để tạo ra trợ lý ảo chính xác và tin cậy.
 
-###  [Blog 1 - SESSION POLICIES TRONG AMAZON EKS POD IDENTITY](3.1-Blog1/)
-Blog này giới thiệu Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.
-
-###  [Blog 2 - ...](3.2-Blog2/)
-Blog này giới thiệu Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.
-
-###  [Blog 3 - ...](3.3-Blog3/)
-Blog này giới thiệu Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.
+###  [Blog 3 - XÂY DỰNG GAME ĐA NGƯỜI CHƠI VỚI KIẾN TRÚC AWS SERVERLESS](3.3-Blog3/)
+Blog này khám phá cách thiết kế và xây dựng hệ thống backend cho game đa người chơi (multiplayer) hoàn toàn dựa trên kiến trúc Serverless của AWS. Giải pháp này giúp hệ thống tự động mở rộng quy mô linh hoạt theo lượng người chơi theo thời gian thực, giảm thiểu gánh nặng quản lý máy chủ và tối ưu hóa chi phí.

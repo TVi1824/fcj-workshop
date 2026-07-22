@@ -6,145 +6,159 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-# Chrono Genesis Game  
+# Chrono Genesis Game
+
 ## A Turn-Based Trading Card Web Game Built on a Serverless Architecture on AWS
 
-### 1. Executive Summary  
-The project is Chrono Genesis Game — a competitive web game (turn-based trading card game) built on a Serverless Real-time Architecture on the AWS platform.
+### 1. Executive Summary
 
-The system simultaneously uses Amazon API Gateway (HTTP API) and Amazon API Gateway (WebSocket API). The HTTP API handles traditional functions such as login, player profile management, deck management, and match history; while the WebSocket API is responsible for synchronizing match state in real time. All game business logic is processed by multiple specialized AWS Lambda functions. Amazon DynamoDB serves as the central data hub, storing match state (Game State), WebSocket connection information, user data, decks, and match history with low latency and high scalability.
+The project is Chrono Genesis Game, a turn-based trading card web game built on a Serverless Real-time Architecture on AWS.
 
+The entire game uses WebSocket to synchronize data in real time. Match business logic is handled by multiple specialized AWS Lambda functions. The system uses Amazon DynamoDB exclusively as a comprehensive data center, serving two roles: storing match state (Game State) with millisecond-level latency in real time, while also securely and cost-efficiently storing persistent data (User, Deck, Match History, Logs).
 
-### 2. Problem Statement  
-*Current Problems*  
-- Traditional real-time game systems require continuous server maintenance costs even when no players are active.
+### 2. Problem Statement
 
-- Network latency negatively impacts the player experience in a game that demands constant strategic calculation.
+_Current Problems_
 
-*Solution*  
-Deploy a Serverless Real-time Architecture using Amazon API Gateway (HTTP API) and Amazon API Gateway (WebSocket API). All game logic is handled by independent AWS Lambda functions. After a match ends, tasks that do not require an immediate response are placed into Amazon SQS for asynchronous processing, reducing the load on the Game Engine and optimizing overall system performance.
+- Traditional real-time game systems require continuous server maintenance costs even when there are no players.
 
-### 3. Solution Architecture  
-The platform applies an AWS Serverless architecture to operate a real-time competitive trading card web game capable of automatically scaling to support thousands of concurrent players. The user interface is deployed on AWS Amplify and accessed through Amazon Route 53. Players log in via Amazon Cognito to receive a JWT Token. REST requests (login, profile, deck, history, etc.) are sent to Amazon API Gateway (HTTP API), while in-match operations use Amazon API Gateway (WebSocket API) to ensure low-latency, bidirectional data transmission.
+- Network latency negatively impacts the experience of games that require constant tactical calculation.
 
-Specialized Lambda functions — Cancel Match, Start Match, Process Game Engine, Save Deck, Handle Timeout, and End Match — handle the entire game lifecycle. Process Game Engine serves as the core component, updating match state in Amazon DynamoDB and broadcasting results to players via WebSocket.
+_Solution_  
+Deploy a Serverless Real-time Architecture via Amazon API Gateway (WebSocket API) and AWS Lambda functions to create independent processing flows. Converge to a single Game Engine flow that interacts directly with Amazon DynamoDB to update state, ensuring low latency and cost savings.
 
-After a match ends, the Lambda End Match function sends an event to Amazon SQS. The Lambda Post Match Worker reads from the queue to handle post-match tasks such as updating Rank, EXP, Match History, and Game Logs. This asynchronous mechanism allows the Game Engine to respond faster, reduces player wait times, and increases system scalability.
+### 3. Solution Architecture
 
-![Architecture](/images/2-Proposal/arch.png)
+The platform applies AWS Serverless architecture to operate a real-time turn-based trading card web game, capable of automatically scaling to support thousands of simultaneous players. The user interface is distributed via AWS Amplify and Route 53, secured and authenticated by Amazon Cognito.
 
+Real-time bidirectional connections (WebSocket) are routed through Amazon API Gateway to interact directly with a set of AWS Lambda functions (Start Match, Process Game Engine, Save Deck, Handle Timeout, End Match) to handle all centralized game logic.
 
-*AWS Services Used*  
-- *AWS Amplify*: Hosts and distributes the web game interface (React/TypeScript), automating CI/CD.
+Game data and connection information are stored in Amazon DynamoDB. Additionally, after a match ends, events are pushed to Amazon SQS for a Lambda function (Post Match Worker) to asynchronously process tasks such as updating Rank, EXP, and saving match history, ensuring high performance and ultra-low latency.
 
-- *AWS Lambda*: Processes data and separates business logic into independent functions.
+![IoT Weather Station Architecture](/images/2-Proposal/arch.png)
 
-- *Amazon Route 53*: Routes traffic to the web application.  
+_AWS Services Used_
 
-- *Amazon Cognito*: Authenticates player identity, manages login sessions, and issues JWT Tokens. 
+- _AWS Amplify_: Manages domain names, hosts and distributes the web game interface (React/TypeScript), automates CI/CD.
 
-- *Amazon API Gateway (HTTP API)*: Provides REST APIs for login, player profile management, deck management, match history, and other non-real-time functions.
+- _AWS Lambda_: Processes data and triggers Glue jobs (2 functions).
 
-- *Amazon API Gateway (WebSocket API)*: Maintains a real-time, bidirectional connection between players and the Game Engine, transmitting match data with low latency.
+- _Amazon Route 53_: Communicates with the web application.
 
-- *AWS Lambda*: Handles centralized game logic and computational tasks.
+- _Amazon Cognito_: Authenticates player identities, manages login sessions, and issues JWT Tokens.
 
-- *Amazon SQS*: An asynchronous queue that receives data from the Lambda Engine for further processing.
+- _Amazon API Gateway (WebSocket API)_: Manages real-time bidirectional connections between the Client and Server.
 
-- *Amazon DynamoDB*: A NoSQL database that stores match state, connection information, and user data.
+- _AWS Lambda_: Handles centralized game logic and computation tasks.
 
-- *Security & Monitoring (IAM, KMS, Secrets Manager, CloudWatch, X-Ray)*: Manages access control, key management, log tracking, and system performance monitoring.
+- _Amazon SQS_: An asynchronous queue that receives data from the Lambda Engine and processes it.
 
-*Component Design*  
-- *Real-time Routing*: Amazon API Gateway combined with Route 53 manages the bidirectional WebSocket connection between players and the system.   
+- _Amazon DynamoDB_: A NoSQL database storing match state, connection information, and user data.
 
-- *Game Logic Processing*: Specialized Lambda functions (Cancel Match, Start Match, Process Game Engine, Save Deck, Handle Timeout, and End Match) work together to handle the entire lifecycle of a match.
+- _Security & Monitoring (IAM, KMS, Secrets Manager, CloudWatch, X-Ray)_: Authorization security, key management, log tracking, and system performance monitoring.
 
-- *Asynchronous Processing*: Amazon SQS receives end-of-match events so that the Lambda worker can automatically calculate Rank, EXP, and save match history.
+_Component Design_
 
-- *Data Processing*: Amazon DynamoDB stores the board state, connection information, and player profiles.  
+- _Real-time routing_: Amazon API Gateway combined with Route 53 manages bidirectional WebSocket connections between players and the system.
 
-- *Web Interface*: Built with React / TypeScript, packaged and distributed via AWS Amplify's CDN network.
+- _Game logic processing_: A set of AWS Lambda functions acting as a centralized Game Engine.
 
-- *User Management*: Uses Amazon Cognito User Pool to manage the complete account lifecycle (registration, authentication, password changes, and session revocation).
+- _Asynchronous processing_: Amazon SQS receives match-end events for a Lambda worker to automatically calculate Rank, EXP, and save history.
 
-### 4. Technical Implementation  
-*Deployment Phases*  
-1. Infrastructure Initialization: Deploy the environment, configure the domain, and set up CI/CD through AWS Amplify.
+- _Data processing_: Amazon DynamoDB stores board state, connection information, and player profiles.
 
-2. Connection & Authentication: Configure Amazon Cognito, deploy API Gateway (HTTP API) for REST APIs, and API Gateway (WebSocket API) for real-time communication.
+- _Web interface_: Built with React / TypeScript, packaged and distributed via AWS Amplify's CDN network.
 
-3. Game Engine Development: Program the core Lambda functions (Start Match, Process Action, End Match) to handle card game logic.
+- _User management_: Uses Amazon Cognito User Pool to manage the full account lifecycle (registration, authentication, password change, and session revocation).
 
-4. Post-Match Processing: Configure Amazon SQS and the Lambda Post Match Worker to asynchronously process Rank updates, EXP, Match History, and Game Logs, ensuring the Game Engine always responds quickly.
+### 4. Technical Implementation
 
-5. Testing & Optimization: Monitor with X-Ray and CloudWatch, optimize security with WAF/IAM, and conduct load testing (Stress Test).
+_Deployment Phases_
 
-*Technical Requirements*  
-- *System Infrastructure*: AWS Amplify (Hosting & CI/CD), GitHub, Route 53 (domain), IAM, and VPC for deployment, management, and security.  
+1. Infrastructure initialization: Deploy the environment, domain, and set up CI/CD via AWS Amplify.
 
-- *Game Platform*: Amazon Cognito (JWT authentication), Amazon API Gateway (HTTP API) for REST APIs, Amazon API Gateway (WebSocket API) for real-time connections, AWS Lambda (Cancel Match, Start Match, Process Game Engine, Save Deck, Handle Timeout, End Match, Post Match Worker), Amazon SQS for asynchronous processing, DynamoDB storing GameState, UserProfile, Connections, MatchHistory, and GameLogs, CloudWatch and X-Ray (monitoring), AWS WAF (security). The frontend uses React with a WebSocket connection to synchronize match state in real time.
+2. Connection & Authentication: Configure Amazon Cognito for users and establish the WebSocket connection flow via API Gateway.
 
-### 5. Roadmap & Milestones  
-- *Pre-Internship (Month 0)*: 1 month of planning.
-    - Month 1: Study and learn AWS services, practice Lab exercises to consolidate knowledge.  
-    - Month 2: Design and refine the architecture.  
-    - Month 3: Deploy, test, and launch.  
-- *Post-Deployment*: Research and develop additional features. 
+3. Game Engine Development: Program core Lambda functions (Start Match, Process Action, End Match) to handle card game logic.
 
-### 6. Budget Estimate   
+4. Post-match processing: Configure the SQS queue and Lambda Worker to handle Rank scores and history without causing system bottlenecks.
 
-*Infrastructure Costs*  
-- AWS Amplify: $0.00 – $0.02/month (Hosting ~500 MB, CI/CD a few deployments, within the 12-month Free Tier).
+5. Testing & Optimization: Monitor with X-Ray, CloudWatch, optimize security with WAF/IAM, and perform load testing (Stress Test).
 
-- Amazon Route 53: $0.50/month (1 Hosted Zone, excluding domain registration fees).
+_Technical Requirements_
 
-- Amazon Cognito: $0.00/month (≤ 10 users, within the Free Tier MAU).
+- _System Infrastructure_: AWS Amplify (Hosting & CI/CD), GitHub, Route 53 (domain), IAM and VPC for system deployment, management, and security.
+
+- _Game Platform_: Amazon Cognito (JWT authentication), API Gateway (WebSocket), AWS Lambda (game logic processing), DynamoDB (storing player data, matches, and decks), Amazon SQS (post-match task processing), CloudWatch and X-Ray (monitoring), AWS WAF (security). Frontend uses React connected via WebSocket to synchronize match state in real time.
+
+### 5. Roadmap & Milestones
+
+- _Pre-internship (Month 0)_: 1 month of planning.
+  - Month 1: Study and learn AWS services, practice Labs to consolidate knowledge.
+  - Month 2: Design and adjust the architecture.
+  - Month 3: Deploy, test, and go live.
+- _Post-deployment_: Research and develop additional new features.
+
+### 6. Budget Estimate
+
+_Infrastructure Costs_
+
+- AWS Amplify: $0.00 – $0.02/month (Hosting ~500 MB, CI/CD a few deployments, within 12-month Free Tier).
+
+- Amazon Route 53: $0.50/month (01 Hosted Zone, excluding domain registration fee).
+
+- Amazon Cognito: $0.00/month (≤ 10 users, within Free Tier MAU).
 
 - Amazon API Gateway (WebSocket): $0.00 – $0.02/month (~20,000 WebSocket messages and low connection time, within Free Tier).
 
-- AWS Lambda: $0.00/month (~50,000 requests, 512 MB, below the Free Tier of 1 million requests and 400,000 GB-s).
+- AWS Lambda: $0.00/month (~50,000 requests, 512 MB, below Free Tier of 1 million requests and 400,000 GB-s).
 
-- Amazon DynamoDB: $0.00/month (≈1 GB of data, using Provisioned mode at 25 WCU/RCU to stay within Free Tier).
+- Amazon DynamoDB: $0.00/month (≈1 GB data, Provisioned 25 WCU/RCU mode for $0 within Free Tier).
 
-- Amazon SQS: $0.00/month (~10,000 messages, below the Free Tier).
+- Amazon SQS: $0.00/month (~10,000 messages, below Free Tier).
 
-- Amazon CloudWatch: $0.00/month (≈1 GB of log storage, below the 5 GB free monthly threshold).
+- Amazon CloudWatch: $0.00/month (≈1 GB log storage, below 5 GB free/month threshold).
 
 - AWS X-Ray: $0.00/month (low trace volume, within Free Tier).
 
 - AWS KMS: $0.00/month (using AWS-managed keys).
 
-- AWS Systems Manager Parameter Store: $0.00/month (replaces Secrets Manager to store 1 Secret completely free of charge).
+- AWS Systems Manager Parameter Store: $0.00/month (Replaces Secrets Manager to store 01 Secret completely free).
 
-- Internet Data Transfer: $0.00/month (~1 GB Data Transfer Out, below the 100 GB free monthly threshold).
+- Internet Data Transfer: $0.00/month (~1 GB Data Transfer Out, below 100 GB free/month threshold).
 
-- AWS WAF: $0.00/month (if disabled) / ≥ $5.00/month (if 1 Web ACL is enabled to filter malicious requests).
+- AWS WAF: $0.00/month (if disabled) / ≥ $5.00/month (if 01 Web ACL is enabled to filter malicious requests).
 
-*Total Cost*:
-- MVP Infrastructure (without WAF): approximately $0.54/month (~$6.50/year).
+_Total Cost_:
 
-- MVP Infrastructure (with WAF): approximately $5.54/month (~$66.50/year).    
+- MVP infrastructure cost (without WAF): approximately $0.54/month (~$6.50/year).
 
-### 7. Risk Assessment  
-*Risk Matrix*  
-- Lambda Cold Start causing lag on the first turn: Medium likelihood, medium impact.  
+- MVP infrastructure cost (with WAF): approximately $5.54/month (~$66.50/year).
 
-- Player-side WebSocket network disconnection: High likelihood, high impact.  
+### 7. Risk Assessment
 
-- Hitting AWS Service Quota limits: Low likelihood, very high impact.
+_Risk Matrix_
 
-*Mitigation Strategies*  
-- Mitigating Lambda Cold Start: Optimize startup time by reducing package size, reusing connections, and only configuring Provisioned Concurrency for real-time Lambda functions (Process Game Engine) when the system experiences high traffic. This approach significantly reduces first-turn latency while still optimizing operational costs.
+- Lambda Cold Start causing lag on the first turn: Medium likelihood, medium impact.
 
-- Mitigating WebSocket disconnection: Implement an Auto-Reconnect mechanism on the frontend combined with periodic heartbeat pings to detect connection loss. When a player reconnects, API Gateway and Lambda update the new Connection ID in DynamoDB, then re-synchronize the current Game State so the player can continue the match without creating a new session.
+- Player-side WebSocket connection drops: High likelihood, high impact.
 
-- Mitigating AWS Quota limits: Set up CloudWatch Metrics and CloudWatch Alarms to monitor the number of WebSocket connections, Lambda Invocations, and other critical resources. When resources reach approximately 70–80% of the limit, the system sends an email alert so administrators can proactively request a quota increase before it impacts users. 
+- Hitting AWS Quota limits: Low likelihood, very high impact.
 
-*Contingency Plan*  
-- Resource scaling: When AWS resources approach the Service Quota, administrators request a quota increase and temporarily restrict the creation of new matches, prioritizing resources for ongoing matches to ensure system stability.  
+_Mitigation Strategies_
 
-### 8. Expected Outcomes  
-- *Technical Improvements*: Successfully build a fully Serverless Game Engine pipeline, replacing continuously maintained servers to reduce costs. Use Amazon SQS to decouple post-match tasks from the real-time processing pipeline, reducing latency, improving scalability, and optimizing operational costs.
+- Mitigating Lambda Cold Start: Optimize startup time by reducing package size, reusing connections, and only configuring Provisioned Concurrency for real-time processing Lambdas (Process Game Engine) when the system has high traffic. This significantly reduces first-turn latency while still optimizing operational costs.
 
-- *Long-term Value*: A data platform for game development that can be reused for future projects.
+- Mitigating WebSocket disconnections: Build an Auto-Reconnect mechanism on the Frontend combined with periodic heartbeat signals to detect connection loss. When a player reconnects, API Gateway and Lambda update the new Connection ID in DynamoDB, then re-synchronize the current Game State so the player can continue the match without creating a new session.
+
+- Mitigating AWS Quota limits: Set up CloudWatch Metrics and CloudWatch Alarms to monitor the number of WebSocket connections, Lambda Invocations, and critical resources. When resources reach approximately 70–80% of their limits, the system sends an email alert for administrators to proactively request limit increases before users are affected.
+
+_Contingency Plan_
+
+- Resource scaling: When AWS resources approach Service Quota limits, administrators request limit increases and temporarily restrict the creation of new matches, prioritizing resources for ongoing matches to ensure system stability.
+
+### 8. Expected Outcomes
+
+- _Technical improvement_: Successfully build a fully Serverless Game Engine flow, replacing continuously maintained servers to reduce costs.
+
+- _Long-term value_: A data platform for game development that can be reused for future projects.

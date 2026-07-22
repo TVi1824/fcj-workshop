@@ -10,7 +10,6 @@ pre: " <b> 5. </b> "
 # XÂY DỰNG WEB GAME TRÊN AWS VỚI SERVERLESS ARCHITECTURE
 
 **Link dự án:** [Chrono Genesis Game](https://dev.d3oenyc702mfnb.amplifyapp.com/)
-**Link Demo:** []
 
 #### Tổng quan
 

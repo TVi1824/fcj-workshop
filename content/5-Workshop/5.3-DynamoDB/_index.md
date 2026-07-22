@@ -24,6 +24,8 @@ The system uses 5 DynamoDB tables to handle both high-throughput real-time data 
 
 ![overview](/images/5-Workshop/5.3-S3-vpc/user.png)
 
+--- 
+
 **2. GameState Table:** This table operates under continuous high-frequency read/write load. It holds the LIFO array that powers the "Miss Timing" mechanism.
 - **Partition Key (PK):** match_id (String)
 ```export interface GameState {
@@ -39,6 +41,8 @@ The system uses 5 DynamoDB tables to handle both high-throughput real-time data 
 ```
 ![overview](/images/5-Workshop/5.3-S3-vpc/GameState.png)
 
+---
+
 **3. GameLogs Table:** This table serves the Lambda Post Match Worker function, recording every move for analytics, anti-cheat, or replay functionality.
 - **Partition Key (PK):** match_id (String)
 - **Sort Key (SK):** action_sequence (Number)
@@ -53,6 +57,8 @@ The system uses 5 DynamoDB tables to handle both high-throughput real-time data 
 ```
 ![overview](/images/5-Workshop/5.3-S3-vpc/GameLogs.png)
 
+---
+
 **4. Connections Table:** To enable the system to "broadcast" the board state to the correct screens of both players in a match, each player's Connection ID is stored in a dedicated table.
 - **Partition Key (PK):** connection_id (String)
 
@@ -64,6 +70,8 @@ The system uses 5 DynamoDB tables to handle both high-throughput real-time data 
 }
 ```
 ![overview](/images/5-Workshop/5.3-S3-vpc/Connections.png)
+
+---
 
 **5. MatchHistory Table:** Stores activity history.
 - **Partition Key (PK):** connection_id (String)

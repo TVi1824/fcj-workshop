@@ -23,6 +23,8 @@ lâu dài.
 }
 ```
 
+---
+
 ![overview](/images/5-Workshop/5.3-S3-vpc/user.png)
 
 **2. Bảng GameState:** Bảng này hoạt động với cường độ đọc/ghi liên tục. Đây là nơi chứa mảng LIFO phục vụ cơ chế "Miss Timing". 
@@ -40,6 +42,8 @@ lâu dài.
 ```
 ![overview](/images/5-Workshop/5.3-S3-vpc/GameState.png)
 
+---
+
 **3. Bảng GameLogs:** Bảng này phục vụ cho Lambda Post Match Worker , giúp lưu lại từng nước cờ để phân tích, chống gian lận hoặc làm tính năng xem lại trận (Replay). 
 - **Partition Key (PK):** match_id (String)
 - **Sort Key (SK):** action_sequence (Number)
@@ -54,6 +58,8 @@ lâu dài.
 ```
 ![overview](/images/5-Workshop/5.3-S3-vpc/GameLogs.png)
 
+---
+
 **4. Bảng Connections:** Để hệ thống có thể "Broadcast" trạng thái bàn cờ về đúng màn hình của 2 người chơi trong trận. Các Connection ID của player sẽ được lưu trữ vào bảng riêng.
 - **Partition Key (PK):** connection_id (String)
 
@@ -65,6 +71,8 @@ lâu dài.
 }
 ```
 ![overview](/images/5-Workshop/5.3-S3-vpc/Connections.png)
+
+---
 
 **5. Bảng MatchHistory:** Lưu lịch sử hoạt động.
 - **Partition Key (PK):** connection_id (String)

@@ -10,7 +10,6 @@ pre: " <b> 5. </b> "
 # BUILDING A WEB GAME ON AWS WITH SERVERLESS ARCHITECTURE
 
 **Project Link:** [Chrono Genesis Game](https://dev.d3oenyc702mfnb.amplifyapp.com/play)
-**Demo:** []
 
 #### Overview
 
